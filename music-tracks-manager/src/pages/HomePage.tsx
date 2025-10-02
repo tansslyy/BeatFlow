@@ -9,9 +9,6 @@ import { Box, Typography, Button, Paper } from "@mui/material";
 import { SearchAppBar } from "../components/SeachBar/SearchBar";
 import TablePagination from "@mui/material/TablePagination";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
-import { UploadTrackFile } from "../components/UploadTrtackFile/UploadTrackFile";
-import { url } from "inspector";
-import { AudioFile } from "@mui/icons-material";
 import { TrackFilterBar } from "../components/TrackFilterSortBar/TrackFilterBar";
 
 const model: GetModel = {
@@ -161,60 +158,63 @@ export const HomePage = () => {
       </Paper>
 
       {/* Search and Filter*/}
+
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "80%",
+          maxWidth: 900,
+          margin: "24px auto",
+          padding: "8px 16px",
+          backgroundColor: "#f5f5f5",
+          borderRadius: 4,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          gap: 2,
         }}
       >
+        {/* Search */}
         <Box
           sx={{
-            margin: 4,
-            display: "flex",
-            justifyContent: "left",
-            alignItems: "center",
+            flex: 1,
+            input: {
+              padding: "10px 14px",
+              borderRadius: 3,
+              backgroundColor: "#fff",
+              boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
+            },
           }}
         >
-          <Box sx={{ width: "100%" }}>
-            <SearchAppBar
-              onSearch={(response) => {
-                setTracks(response); 
-                setPage(0);
-              }}
-            />
-          </Box>
+          <SearchAppBar
+            onSearch={(response) => {
+              setTracks(response);
+              setPage(0);
+            }}
+          />
         </Box>
 
         {/* Filter */}
-
         <Box
           sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "end",
-            margin: "16px",
-            width: "100%",
+            minWidth: 180,
+            borderRadius: 3,
+            padding: "6px 12px",
+            cursor: "pointer",
           }}
         >
-          <Box
-            sx={{
-              ml: 4,
-              width: "10%",
+          <TrackFilterBar
+            tracks={tracks?.data || []}
+            onFilter={(filteredTracks) => {
+              if (tracks) {
+                setTracks({
+                  ...tracks,
+                  data: filteredTracks,
+                  meta: { ...tracks.meta, total: filteredTracks.length },
+                });
+              }
             }}
-          >
-            <TrackFilterBar
-              tracks={tracks?.data || []}
-              onFilter={(filteredTracks) => {
-                if (tracks) {
-                  setTracks({
-                    ...tracks,
-                    data: filteredTracks,
-                    meta: { ...tracks.meta, total: filteredTracks.length },
-                  });
-                }
-              }}
-            />
-          </Box>
+          />
         </Box>
       </Box>
 
@@ -226,35 +226,22 @@ export const HomePage = () => {
       />
 
       {/* Track List */}
-      <Paper
-        elevation={3}
-        sx={{
-          borderRadius: "25px",
-          p: 3,
-          background: "#fff",
-          mb: 5,
-          boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {tracks?.data.length === 0 ? (
-          <Typography
-            variant="h6"
-            align="center"
-            sx={{ color: "#9e9e9e", fontStyle: "italic", mt: 5 }}
-          >
-            Немає треків 💤
-          </Typography>
-        ) : (
-          <TrackList
-            tracks={tracks}
-            onTrackDelete={handleTrackDelete}
-            onTrackUpdated={handleTrackUpdated}
-          />
-        )}
-      </Paper>
+
+      {tracks?.data.length === 0 ? (
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{ color: "#9e9e9e", fontStyle: "italic", mt: 5 }}
+        >
+          Немає треків 💤
+        </Typography>
+      ) : (
+        <TrackList
+          tracks={tracks}
+          onTrackDelete={handleTrackDelete}
+          onTrackUpdated={handleTrackUpdated}
+        />
+      )}
 
       {/* Pagination */}
       <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>

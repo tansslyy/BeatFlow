@@ -8,6 +8,8 @@ import {
   Button,
   IconButton,
   Collapse,
+  Paper,
+  Typography,
 } from "@mui/material";
 import { Track } from "../../api/track/models/Track";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
@@ -55,21 +57,50 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        mb: 2,
-        flexDirection: "column",
-      }}
-    >
-      <IconButton onClick={toggleOpen} color="inherit">
-        <FilterAltOutlinedIcon />
-      </IconButton>
-      <Collapse in={open}>
-        <Box sx={{ display: "flex" }}>
-          <FormControl sx={{ minWidth: 120 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      {/* Кнопка фільтрів */}
+      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
+        <IconButton
+          onClick={toggleOpen}
+          sx={{
+            background: "#fff",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+            "&:hover": {
+              background: "#f5f5f5",
+              transform: "translateY(-1px)",
+            },
+            transition: "0.2s",
+          }}
+        >
+          <FilterAltOutlinedIcon sx={{ color: "#5c6bc0" }} />
+        </IconButton>
+      </Box>
+
+      {/* Панель фільтрів */}
+      <Collapse in={open} sx={{ width: "100%", mt: 1 }}>
+        <Paper
+          elevation={3}
+          sx={{
+            p: 3,
+            borderRadius: "20px",
+            background: "linear-gradient(135deg, #fdfbfb, #ebedee)",
+            display: "flex",
+            gap: 3,
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            transition: "0.3s ease-in-out",
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 600, color: "#2e3a59", minWidth: 80 }}
+          >
+            Filters:
+          </Typography>
+
+          <FormControl sx={{ minWidth: 160 }}>
             <InputLabel>Genre</InputLabel>
             <Select
               value={genre}
@@ -85,7 +116,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
             </Select>
           </FormControl>
 
-          <FormControl sx={{ minWidth: 150 }}>
+          <FormControl sx={{ minWidth: 180 }}>
             <InputLabel>Sort By</InputLabel>
             <Select
               value={filters}
@@ -100,10 +131,28 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
             </Select>
           </FormControl>
 
-          <Button variant="contained" onClick={handleFilter}>
+          <Button
+            variant="contained"
+            onClick={handleFilter}
+            sx={{
+              background: "linear-gradient(135deg, #5c6bc0, #8e99f3)",
+              fontWeight: "bold",
+              borderRadius: "30px",
+              px: 3,
+              py: 1.2,
+              textTransform: "none",
+              boxShadow: "0 5px 15px rgba(0,0,0,0.15)",
+              "&:hover": {
+                background: "linear-gradient(135deg, #3f51b5, #7e8cf5)",
+                transform: "translateY(-2px)",
+              },
+              transition: "0.3s",
+              alignSelf: "flex-start",
+            }}
+          >
             Apply
           </Button>
-        </Box>
+        </Paper>
       </Collapse>
     </Box>
   );

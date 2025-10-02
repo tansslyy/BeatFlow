@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Track } from "../../api/track/models/Track";
-import { TrackList } from "../TrackList/TrackList";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { uploadTrackFile } from "../../api/track/trackApi";
 
 interface UploadTrackFileProps {

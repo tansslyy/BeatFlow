@@ -1,10 +1,7 @@
 import React from "react";
-import { useTheme } from "@mui/material/styles";
 import { Box, IconButton } from "@mui/material";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
 import { useAudioPlayer } from "../hooks/useAudioPlayer";
 import { Track } from "../api/track/models/Track";
 

@@ -3,17 +3,13 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { fetchTracks } from "../../api/track/trackApi";
 import { GetModel } from "../../api/track/models/CreateTrack";
 import { Track } from "../../api/track/models/Track";
 import { PageList } from "../../types/PageList";
-import { TrackFilterBar } from "../TrackFilterSortBar/TrackFilterBar";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -101,29 +97,35 @@ export const SearchAppBar: React.FC<Props> = ({ onSearch }) => {
   };
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        display: "flex",
-        alignItems: "flex-start",
-      }}
-    >
+    <Box sx={{ flexGrow: 1, display: "flex", alignItems: "flex-start", mb: 2 }}>
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "#F4C9D6",
-          color: "#3E2723",
-          borderRadius: 4,
-          boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px",
+          backgroundColor: "transparent",
+          boxShadow: "none",
+          width: "100%",
         }}
       >
-        <Toolbar>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Type to search"
+        <Toolbar sx={{ p: 0 }}>
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#fff",
+              borderRadius: "25px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+              px: 2,
+              py: 0.5,
+              transition: "0.3s",
+              "&:hover": {
+                boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
+              },
+            }}
+          >
+            <SearchIcon sx={{ color: "#5c6bc0", mr: 1, fontSize: "28px" }} />
+            <InputBase
+              placeholder="Search tracks..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={async (e) => {
@@ -132,8 +134,14 @@ export const SearchAppBar: React.FC<Props> = ({ onSearch }) => {
                   await searchTrack(value);
                 }
               }}
+              sx={{
+                flex: 1,
+                fontSize: "16px",
+                color: "#2e3a59",
+                "& input::placeholder": { color: "#9e9e9e" },
+              }}
             />
-          </Search>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

@@ -4,14 +4,12 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Box } from "@mui/material";
 import { Chip } from "@mui/material";
 import { useState } from "react";
 import { editTrack } from "../../api/track/trackApi";
 import { Track } from "../../api/track/models/Track";
-import { UploadTrackFile } from "../UploadTrtackFile/UploadTrackFile";
 
 interface EditTrackModalProps {
   isOpen: boolean;
@@ -117,17 +115,27 @@ export const EditTrackModal: React.FC<EditTrackModalProps> = ({
         maxWidth="sm"
         PaperProps={{
           sx: {
-            borderRadius: 3,
-            padding: 2,
-            backgroundColor: "#f5f5f5",
+            borderRadius: 4,
+            padding: 3,
+            background: "linear-gradient(145deg, #fdfcff, #e3f0ff)",
+            boxShadow: "0 12px 30px rgba(0,0,0,0.15)",
           },
         }}
       >
+        {/* Title */}
         <DialogTitle
-          sx={{ fontWeight: "bold", fontSize: "1.5rem", textAlign: "center" }}
+          sx={{
+            fontWeight: "bold",
+            fontSize: "1.6rem",
+            textAlign: "center",
+            color: "#1e3a8a",
+            mb: 2,
+            letterSpacing: "0.5px",
+          }}
         >
-          Edit track
+          Edit Track
         </DialogTitle>
+
         <DialogContent>
           <Box
             component="form"
@@ -137,41 +145,55 @@ export const EditTrackModal: React.FC<EditTrackModalProps> = ({
               mt: 2,
               display: "flex",
               flexDirection: "column",
-              gap: 2,
+              gap: 3,
             }}
           >
-            <TextField
-              label="Track Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              fullWidth
-              required
-              variant="outlined"
-            />
-            <TextField
-              label="Artist"
-              value={artist}
-              onChange={(e) => setArtist(e.target.value)}
-              fullWidth
-              required
-              variant="outlined"
-            />
-            <TextField
-              label="Album"
-              value={album}
-              onChange={(e) => setAlbum(e.target.value)}
-              fullWidth
-              variant="outlined"
-            />
-            <TextField
-              label="Cover Image URL"
-              value={coverImage}
-              onChange={(e) => setCoverImage(e.target.value)}
-              fullWidth
-              variant="outlined"
-              placeholder="https://..."
-            />
+            {/* Text Fields */}
+            {[
+              {
+                label: "Track Title",
+                value: title,
+                onChange: setTitle,
+                required: true,
+              },
+              {
+                label: "Artist",
+                value: artist,
+                onChange: setArtist,
+                required: true,
+              },
+              { label: "Album", value: album, onChange: setAlbum },
+              {
+                label: "Cover Image URL",
+                value: coverImage,
+                onChange: setCoverImage,
+                placeholder: "https://...",
+              },
+            ].map((field, idx) => (
+              <TextField
+                key={idx}
+                label={field.label}
+                value={field.value}
+                onChange={(e) => field.onChange(e.target.value)}
+                fullWidth
+                required={field.required || false}
+                placeholder={field.placeholder || ""}
+                variant="outlined"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 3,
+                    backgroundColor: "#f5f7ff",
+                    "&:hover fieldset": { borderColor: "#1976d2" },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#1976d2",
+                      boxShadow: "0 0 6px rgba(25,118,210,0.25)",
+                    },
+                  },
+                }}
+              />
+            ))}
 
+            {/* Genre Input */}
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
               <TextField
                 label="Add Genre"
@@ -186,28 +208,42 @@ export const EditTrackModal: React.FC<EditTrackModalProps> = ({
                 sx={{
                   height: "40px",
                   minWidth: "40px",
+                  borderRadius: 2,
                   backgroundColor: "#4caf50",
+                  "&:hover": { backgroundColor: "#43a047" },
+                  fontWeight: "bold",
                 }}
               >
                 +
               </Button>
             </Box>
 
+            {/* Genre Chips */}
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
               {genres.map((genre) => (
                 <Chip
                   key={genre}
                   label={genre}
                   onDelete={() => handleRemoveGenre(genre)}
-                  color="primary"
-                  sx={{ fontWeight: "bold" }}
+                  sx={{
+                    fontWeight: "600",
+                    bgcolor: "#e3f2fd",
+                    color: "#1976d2",
+                    "& .MuiChip-deleteIcon": { color: "#1565c0" },
+                  }}
                 />
               ))}
             </Box>
           </Box>
         </DialogContent>
+
         <DialogActions
-          sx={{ justifyContent: "space-between", paddingX: 3, paddingY: 1 }}
+          sx={{
+            justifyContent: "space-between",
+            px: 3,
+            py: 2,
+            borderTop: "1px solid #e0e0e0",
+          }}
         >
           <Button
             onClick={handleClose}
@@ -219,7 +255,13 @@ export const EditTrackModal: React.FC<EditTrackModalProps> = ({
             type="submit"
             form="create-track-form"
             variant="contained"
-            sx={{ backgroundColor: "#1976d2", fontWeight: "bold" }}
+            sx={{
+              background: "linear-gradient(135deg, #1976d2, #4dabf5)",
+              fontWeight: "bold",
+              "&:hover": {
+                background: "linear-gradient(135deg, #1565c0, #2196f3)",
+              },
+            }}
           >
             Save
           </Button>

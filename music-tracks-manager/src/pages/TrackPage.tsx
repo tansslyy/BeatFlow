@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Track } from "../api/track/models/Track";
 import { useParams } from "react-router-dom";
 import { fetchTrackbySlug } from "../api/track/trackApi";

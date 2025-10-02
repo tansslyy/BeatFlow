@@ -106,7 +106,6 @@ export const MusicPlayer: React.FC<Props> = ({ track }) => {
         </IconButton>
       </Box>
 
-      {/* 🎵 Гучність */}
       <Stack spacing={2} direction="row" alignItems="center">
         <VolumeDownRounded />
         <Slider

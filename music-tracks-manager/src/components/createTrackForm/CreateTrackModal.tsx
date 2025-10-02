@@ -9,7 +9,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { Chip } from "@mui/material";
 import { useState } from "react";
-import { url } from "inspector";
 import { createTrack } from "../../api/track/trackApi";
 import { Track } from "../../api/track/models/Track";
 import { UploadTrackFile } from "../UploadTrtackFile/UploadTrackFile";
@@ -136,35 +135,38 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
         maxWidth="md"
         PaperProps={{
           sx: {
-            borderRadius: 4,
+            borderRadius: 5,
             padding: 3,
-            backgroundColor: "#fafafa",
+            background: "linear-gradient(145deg, #f8f9fa, #e6f0ff)",
             minHeight: "500px",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+            boxShadow: "0 12px 30px rgba(0,0,0,0.15)",
           },
         }}
       >
+        {/* Title */}
         <DialogTitle
           sx={{
             fontWeight: "bold",
-            fontSize: "1.6rem",
+            fontSize: "1.7rem",
             textAlign: "center",
-            color: "#1976d2",
+            color: "#1e3a8a",
+            letterSpacing: "0.5px",
           }}
         >
           Create New Track
         </DialogTitle>
 
         {/* Stepper */}
-        <Box sx={{ px: 3, mb: 3 }}>
+        <Box sx={{ px: 3, mb: 4 }}>
           <Stepper activeStep={currentStep} alternativeLabel>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel
                   sx={{
                     "& .MuiStepLabel-label": {
-                      fontWeight: "600",
+                      fontWeight: 600,
                       color: "#555",
+                      fontSize: "0.95rem",
                     },
                     "& .Mui-active .MuiStepLabel-label": { color: "#1976d2" },
                     "& .Mui-completed .MuiStepLabel-label": {
@@ -189,40 +191,53 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
                 mt: 2,
                 display: "flex",
                 flexDirection: "column",
-                gap: 2,
+                gap: 3,
               }}
             >
-              <TextField
-                label="Track Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                fullWidth
-                required
-                variant="outlined"
-              />
-              <TextField
-                label="Artist"
-                value={artist}
-                onChange={(e) => setArtist(e.target.value)}
-                fullWidth
-                required
-                variant="outlined"
-              />
-              <TextField
-                label="Album"
-                value={album}
-                onChange={(e) => setAlbum(e.target.value)}
-                fullWidth
-                variant="outlined"
-              />
-              <TextField
-                label="Cover Image URL"
-                value={coverImage}
-                onChange={(e) => setCoverImage(e.target.value)}
-                fullWidth
-                placeholder="https://example.com/image.jpg"
-              />
+              {["Track Title", "Artist", "Album", "Cover Image URL"].map(
+                (label, idx) => (
+                  <TextField
+                    key={idx}
+                    label={label}
+                    value={
+                      label === "Track Title"
+                        ? title
+                        : label === "Artist"
+                        ? artist
+                        : label === "Album"
+                        ? album
+                        : coverImage
+                    }
+                    onChange={(e) => {
+                      if (label === "Track Title") setTitle(e.target.value);
+                      else if (label === "Artist") setArtist(e.target.value);
+                      else if (label === "Album") setAlbum(e.target.value);
+                      else setCoverImage(e.target.value);
+                    }}
+                    fullWidth
+                    required={label !== "Album" && label !== "Cover Image URL"}
+                    placeholder={
+                      label === "Cover Image URL"
+                        ? "https://example.com/image.jpg"
+                        : ""
+                    }
+                    variant="outlined"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 3,
+                        backgroundColor: "#f5f7ff",
+                        "&:hover fieldset": { borderColor: "#1976d2" },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "#1976d2",
+                          boxShadow: "0 0 6px rgba(25,118,210,0.25)",
+                        },
+                      },
+                    }}
+                  />
+                )
+              )}
 
+              {/* Genre Input */}
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <TextField
                   label="Add Genre"
@@ -245,23 +260,26 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
                     minWidth: "40px",
                     backgroundColor: "#4caf50",
                     "&:hover": { backgroundColor: "#43a047" },
+                    borderRadius: 2,
+                    fontWeight: "bold",
                   }}
                 >
                   +
                 </Button>
               </Box>
 
+              {/* Genre Chips */}
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
                 {genres.map((genre) => (
                   <Chip
                     key={genre}
                     label={genre}
                     onDelete={() => handleRemoveGenre(genre)}
-                    color="primary"
                     sx={{
-                      fontWeight: "bold",
+                      fontWeight: "600",
                       bgcolor: "#e3f2fd",
                       color: "#1976d2",
+                      "& .MuiChip-deleteIcon": { color: "#1565c0" },
                     }}
                   />
                 ))}
@@ -270,24 +288,23 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
           )}
 
           {currentStep === 1 && createdTrack && (
-            <Box>
+            <Box sx={{ textAlign: "center", mt: 3 }}>
               <Typography
                 variant="h6"
-                sx={{ mb: 2, textAlign: "center", color: "#1976d2" }}
+                sx={{ mb: 2, color: "#1976d2", fontWeight: 600 }}
               >
                 Track "{createdTrack.title}" Created!
               </Typography>
-              <Typography
-                variant="body2"
-                sx={{ mb: 3, textAlign: "center", color: "#555" }}
-              >
+              <Typography variant="body2" sx={{ mb: 3, color: "#555" }}>
                 Now you can upload a music file for this track.
               </Typography>
+
               <UploadTrackFile
                 trackId={createdTrack.id}
                 existingFileUrl={createdTrack.audioFile || ""}
                 onFileUploaded={handleFileUploaded}
               />
+
               {createdTrack.audioFile && (
                 <Box
                   sx={{
@@ -307,7 +324,14 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
           )}
         </DialogContent>
 
-        <DialogActions sx={{ justifyContent: "space-between", px: 3, py: 2 }}>
+        <DialogActions
+          sx={{
+            justifyContent: "space-between",
+            px: 3,
+            py: 2,
+            borderTop: "1px solid #e0e0e0",
+          }}
+        >
           <Button
             onClick={handleClose}
             sx={{ color: "#f44336", fontWeight: "bold" }}
@@ -321,9 +345,11 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
               form="create-track-form"
               variant="contained"
               sx={{
-                backgroundColor: "#1976d2",
+                background: "linear-gradient(135deg, #1976d2, #4dabf5)",
                 fontWeight: "bold",
-                "&:hover": { backgroundColor: "#1565c0" },
+                "&:hover": {
+                  background: "linear-gradient(135deg, #1565c0, #2196f3)",
+                },
               }}
             >
               Create Track
@@ -331,7 +357,7 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
           )}
 
           {currentStep === 1 && (
-            <Box sx={{ display: "flex", gap: 1 }}>
+            <Box sx={{ display: "flex", gap: 2 }}>
               <Button
                 onClick={handleSkipUpload}
                 variant="outlined"
