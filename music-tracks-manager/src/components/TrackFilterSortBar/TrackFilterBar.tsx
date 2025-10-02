@@ -57,50 +57,128 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
       {/* Кнопка фільтрів */}
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <IconButton
           onClick={toggleOpen}
           sx={{
-            background: "#fff",
-            borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: open
+              ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+              : "rgba(255, 255, 255, 0.95)",
+            backdropFilter: "blur(10px)",
+            borderRadius: 2,
+            width: 44,
+            height: 44,
+
+            transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
             "&:hover": {
-              background: "#f5f5f5",
+              background: open
+                ? "linear-gradient(135deg, #5568d3 0%, #664a91 100%)"
+                : "rgba(255, 255, 255, 1)",
               transform: "translateY(-1px)",
+              boxShadow: "0 8px 24px rgba(102, 126, 234, 0.2)",
             },
-            transition: "0.2s",
           }}
         >
-          <FilterAltOutlinedIcon sx={{ color: "#5c6bc0" }} />
+          <FilterAltOutlinedIcon
+            sx={{
+              color: open ? "#fff" : "#667eea",
+              transition: "all 0.3s ease",
+            }}
+          />
         </IconButton>
       </Box>
 
       {/* Панель фільтрів */}
-      <Collapse in={open} sx={{ width: "100%", mt: 1 }}>
+      <Collapse in={open} timeout={400}>
         <Paper
-          elevation={3}
+          elevation={0}
           sx={{
-            p: 3,
-            borderRadius: "20px",
-            background: "linear-gradient(135deg, #fdfbfb, #ebedee)",
+            p: 2,
+            borderRadius: 2,
             display: "flex",
-            gap: 3,
+            gap: 2,
             flexWrap: "wrap",
             alignItems: "center",
-            justifyContent: "flex-start",
-            transition: "0.3s ease-in-out",
+            maxWidth: 600,
+            width: "100%",
+            background: "rgba(255,255,255,0.95)",
+            boxShadow: "0 4px 16px rgba(102,126,234,0.1)",
+            "&::before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 3,
+              background:
+                "linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
+            },
           }}
         >
           <Typography
             variant="h6"
-            sx={{ fontWeight: 600, color: "#2e3a59", minWidth: 80 }}
+            sx={{
+              fontWeight: 700,
+              fontSize: { xs: "1rem", sm: "1.1rem" },
+              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              minWidth: { xs: "auto", sm: 80 },
+              width: "100%",
+              flexBasis: "100%",
+              mb: 1,
+            }}
           >
-            Filters:
+            Filters
           </Typography>
 
-          <FormControl sx={{ minWidth: 160 }}>
+          <FormControl
+            sx={{
+              minWidth: 120,
+              flex: 1,
+              "& .MuiOutlinedInput-root": {
+                borderRadius: 2,
+                background: "rgba(255, 255, 255, 0.8)",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  background: "rgba(255, 255, 255, 1)",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#667eea",
+                  },
+                },
+                "&.Mui-focused": {
+                  background: "rgba(255, 255, 255, 1)",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#667eea",
+                    borderWidth: 2,
+                  },
+                },
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "#667eea",
+              },
+            }}
+          >
             <InputLabel>Genre</InputLabel>
             <Select
               value={genre}
@@ -116,7 +194,33 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
             </Select>
           </FormControl>
 
-          <FormControl sx={{ minWidth: 180 }}>
+          <FormControl
+            sx={{
+              minWidth: 120,
+              flex: 1,
+              "& .MuiOutlinedInput-root": {
+                borderRadius: 2,
+                background: "rgba(255, 255, 255, 0.8)",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  background: "rgba(255, 255, 255, 1)",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#667eea",
+                  },
+                },
+                "&.Mui-focused": {
+                  background: "rgba(255, 255, 255, 1)",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#667eea",
+                    borderWidth: 2,
+                  },
+                },
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "#667eea",
+              },
+            }}
+          >
             <InputLabel>Sort By</InputLabel>
             <Select
               value={filters}
@@ -135,22 +239,24 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
             variant="contained"
             onClick={handleFilter}
             sx={{
-              background: "linear-gradient(135deg, #5c6bc0, #8e99f3)",
-              fontWeight: "bold",
-              borderRadius: "30px",
+              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              fontWeight: 600,
+              borderRadius: 2,
               px: 3,
-              py: 1.2,
+              py: 1,
               textTransform: "none",
-              boxShadow: "0 5px 15px rgba(0,0,0,0.15)",
+              boxShadow: "0 2px 12px rgba(102,126,234,0.25)",
               "&:hover": {
-                background: "linear-gradient(135deg, #3f51b5, #7e8cf5)",
+                background: "linear-gradient(135deg, #5568d3 0%, #664a91 100%)",
                 transform: "translateY(-2px)",
+                boxShadow: "0 8px 24px rgba(102, 126, 234, 0.4)",
               },
-              transition: "0.3s",
-              alignSelf: "flex-start",
+              "&:active": {
+                transform: "translateY(0px)",
+              },
             }}
           >
-            Apply
+            Apply Filters
           </Button>
         </Paper>
       </Collapse>

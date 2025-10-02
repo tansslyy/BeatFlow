@@ -41,7 +41,7 @@ export const TrackList: React.FC<Props> = ({
           sx={{
             fontWeight: 800,
             background:
-              "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
+              "linear-gradient(135deg, #ff758c 0%, #ff7eb3 50%, #ff758c 100%)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",

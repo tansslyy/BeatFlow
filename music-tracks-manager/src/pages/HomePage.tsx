@@ -13,7 +13,7 @@ import { TrackFilterBar } from "../components/TrackFilterSortBar/TrackFilterBar"
 
 const model: GetModel = {
   page: 1,
-  limit: 100,
+  limit: 10,
   order: "",
   sort: "",
   genre: "",
@@ -114,27 +114,53 @@ export const HomePage = () => {
     >
       {/* Header */}
       <Paper
-        elevation={4}
+        elevation={6}
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "20px 30px",
-          borderRadius: "25px",
-          background: "#fff",
+          padding: { xs: "16px 20px", sm: "20px 30px" },
+          borderRadius: "30px",
+          background: "linear-gradient(145deg, #f5f5f5, #ffffff)",
           mb: 5,
-          boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
+          boxShadow: "0 12px 30px rgba(0,0,0,0.12)",
+          textAlign: "center",
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <LibraryMusicIcon sx={{ fontSize: "45px", color: "#5c6bc0" }} />
+        {/* Left Side: Icon + Title */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            mb: { xs: 2, sm: 0 },
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <LibraryMusicIcon
+            sx={{
+              fontSize: { xs: 40, sm: 50 },
+              background: "linear-gradient(135deg, #5c6bc0, #8e99f3)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          />
           <Typography
             variant="h4"
-            sx={{ fontWeight: "700", color: "#2e3a59", letterSpacing: "1px" }}
+            sx={{
+              fontWeight: 700,
+              color: "#2e3a59",
+              letterSpacing: "1px",
+              fontSize: { xs: "1.6rem", sm: "2rem" },
+            }}
           >
             Track Manager
           </Typography>
         </Box>
+
+        {/* Right Side: Add Track Button */}
         <Button
           variant="contained"
           onClick={() => setShowModal(true)}
@@ -142,47 +168,56 @@ export const HomePage = () => {
             background: "linear-gradient(135deg, #5c6bc0, #8e99f3)",
             fontWeight: "bold",
             borderRadius: "30px",
-            px: 3,
-            py: 1.2,
+            px: { xs: 2.5, sm: 3 },
+            py: { xs: 1, sm: 1.2 },
             textTransform: "none",
-            boxShadow: "0 5px 15px rgba(0,0,0,0.15)",
+            fontSize: { xs: "0.9rem", sm: "1rem" },
+            boxShadow: "0 6px 18px rgba(0,0,0,0.15)",
+            transition: "all 0.3s ease",
             "&:hover": {
               background: "linear-gradient(135deg, #3f51b5, #7e8cf5)",
-              transform: "translateY(-2px)",
+              transform: "translateY(-2px) scale(1.02)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
             },
-            transition: "0.3s",
+            mt: { xs: 1, sm: 0 },
           }}
         >
           + Add Track
         </Button>
       </Paper>
 
-      {/* Search and Filter*/}
-
+      {/* Search + Filter */}
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
-          width: "80%",
-          maxWidth: 900,
-          margin: "24px auto",
-          padding: "8px 16px",
-          backgroundColor: "#f5f5f5",
-          borderRadius: 4,
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          gap: 2,
+          justifyContent: "space-between",
+          width: "100%",
+          margin: "0 auto 24px",
+          gap: { xs: 2, md: 3 },
         }}
       >
         {/* Search */}
-        <Box
+        <Paper
+          elevation={6}
           sx={{
-            flex: 1,
+            flex: { xs: "1 1 100%", md: "0 0 70%" },
+            padding: { xs: "12px 16px", sm: "16px 24px" },
+            borderRadius: "30px",
+            background: "linear-gradient(145deg, #f9f9f9, #fff0f5)",
+            boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
             input: {
-              padding: "10px 14px",
-              borderRadius: 3,
-              backgroundColor: "#fff",
-              boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
+              width: "100%",
+              padding: { xs: "10px 14px", sm: "12px 16px" },
+              borderRadius: "20px",
+              border: "none",
+              background: "#fff",
+              boxShadow: "inset 0 2px 6px rgba(0,0,0,0.1)",
+              "&:focus": {
+                outline: "none",
+                boxShadow: "0 0 8px rgba(92,107,192,0.4)",
+              },
             },
           }}
         >
@@ -192,29 +227,49 @@ export const HomePage = () => {
               setPage(0);
             }}
           />
-        </Box>
+        </Paper>
 
         {/* Filter */}
         <Box
           sx={{
-            minWidth: 180,
-            borderRadius: 3,
-            padding: "6px 12px",
-            cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
           }}
         >
-          <TrackFilterBar
-            tracks={tracks?.data || []}
-            onFilter={(filteredTracks) => {
-              if (tracks) {
-                setTracks({
-                  ...tracks,
-                  data: filteredTracks,
-                  meta: { ...tracks.meta, total: filteredTracks.length },
-                });
-              }
+          <Paper
+            elevation={3}
+            sx={{
+              borderRadius: "50px",
+              padding: "4px 8px",
+              width: { xs: "100%", md: 120 },
+              height: 40,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 3px 10px rgba(0,0,0,0.08)",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                boxShadow: "0 6px 20px rgba(0,0,0,0.12)",
+                transform: "translateY(-2px)",
+              },
             }}
-          />
+          >
+            <TrackFilterBar
+              tracks={tracks?.data || []}
+              onFilter={(filteredTracks) => {
+                if (tracks) {
+                  setTracks({
+                    ...tracks,
+                    data: filteredTracks,
+                    meta: { ...tracks.meta, total: filteredTracks.length },
+                  });
+                }
+              }}
+            />
+          </Paper>
         </Box>
       </Box>
 
@@ -226,7 +281,6 @@ export const HomePage = () => {
       />
 
       {/* Track List */}
-
       {tracks?.data.length === 0 ? (
         <Typography
           variant="h6"

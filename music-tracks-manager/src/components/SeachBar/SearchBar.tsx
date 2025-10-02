@@ -10,6 +10,7 @@ import { fetchTracks } from "../../api/track/trackApi";
 import { GetModel } from "../../api/track/models/CreateTrack";
 import { Track } from "../../api/track/models/Track";
 import { PageList } from "../../types/PageList";
+import { Typography } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -97,53 +98,266 @@ export const SearchAppBar: React.FC<Props> = ({ onSearch }) => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, display: "flex", alignItems: "flex-start", mb: 2 }}>
-      <AppBar
-        position="static"
+    <Box
+      sx={{
+        width: "100%",
+        mb: { xs: 2, sm: 2.5, md: 3 },
+      }}
+    >
+      <Box
         sx={{
-          backgroundColor: "transparent",
-          boxShadow: "none",
+          position: "relative",
           width: "100%",
+          maxWidth: 900,
+          mx: "auto",
         }}
       >
-        <Toolbar sx={{ p: 0 }}>
+        {/* Animated gradient glow */}
+        <Box
+          sx={{
+            position: "absolute",
+            inset: "-4px",
+            background:
+              "linear-gradient(135deg, #667eea, #764ba2, #f093fb, #4facfe)",
+            backgroundSize: "300% 300%",
+            borderRadius: 5,
+            opacity: 0,
+            filter: "blur(16px)",
+            transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+            "&:has(~ * input:focus)": {
+              opacity: 0.6,
+              animation: "gradient 3s ease infinite",
+            },
+            "@keyframes gradient": {
+              "0%": { backgroundPosition: "0% 50%" },
+              "50%": { backgroundPosition: "100% 50%" },
+              "100%": { backgroundPosition: "0% 50%" },
+            },
+          }}
+        />
+
+        {/* Main Search Bar */}
+        <Box
+          sx={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            background: "rgba(255, 255, 255, 0.95)",
+            backdropFilter: "blur(20px)",
+            borderRadius: 4,
+            border: "2px solid rgba(102, 126, 234, 0.08)",
+            boxShadow: "0 8px 32px rgba(102, 126, 234, 0.12)",
+            px: { xs: 2.5, sm: 3 },
+            py: { xs: 1.5, sm: 2 },
+            transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+            "&:hover": {
+              background: "rgba(255, 255, 255, 1)",
+              boxShadow: "0 12px 48px rgba(102, 126, 234, 0.18)",
+              border: "2px solid rgba(102, 126, 234, 0.2)",
+              transform: "translateY(-2px)",
+            },
+            "&:focus-within": {
+              background:
+                "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 255, 0.98) 100%)",
+              border: "2px solid rgba(102, 126, 234, 0.4)",
+              boxShadow:
+                "0 20px 60px rgba(102, 126, 234, 0.25), 0 0 0 1px rgba(102, 126, 234, 0.1)",
+              transform: "translateY(-4px) scale(1.01)",
+            },
+          }}
+        >
+          {/* Icon with animation */}
           <Box
             sx={{
-              flex: 1,
               display: "flex",
               alignItems: "center",
-              backgroundColor: "#fff",
-              borderRadius: "25px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-              px: 2,
-              py: 0.5,
-              transition: "0.3s",
-              "&:hover": {
-                boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
-              },
+              justifyContent: "center",
+              mr: 2,
+              position: "relative",
             }}
           >
-            <SearchIcon sx={{ color: "#5c6bc0", mr: 1, fontSize: "28px" }} />
-            <InputBase
-              placeholder="Search tracks..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={async (e) => {
-                if (e.key === "Enter") {
-                  const value = (e.target as HTMLInputElement).value;
-                  await searchTrack(value);
-                }
-              }}
+            <Box
               sx={{
-                flex: 1,
-                fontSize: "16px",
-                color: "#2e3a59",
-                "& input::placeholder": { color: "#9e9e9e" },
+                position: "absolute",
+                width: 40,
+                height: 40,
+                borderRadius: "50%",
+                background: "transparent",
+                transition: "all 0.3s ease",
+                "input:focus ~ &": {
+                  background:
+                    "radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%)",
+                  animation: "pulse 2s ease-in-out infinite",
+                },
+                "@keyframes pulse": {
+                  "0%, 100%": { transform: "scale(1)", opacity: 0.5 },
+                  "50%": { transform: "scale(1.2)", opacity: 0.2 },
+                },
+              }}
+            />
+            <SearchIcon
+              sx={{
+                fontSize: { xs: 26, sm: 28 },
+                color: "#667eea",
+                transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                position: "relative",
+                zIndex: 1,
               }}
             />
           </Box>
-        </Toolbar>
-      </AppBar>
+
+          {/* Input Field */}
+          <InputBase
+            placeholder="Search for tracks, artists, albums..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={async (e) => {
+              if (e.key === "Enter") {
+                const value = (e.target as HTMLInputElement).value;
+                await searchTrack(value);
+              }
+            }}
+            sx={{
+              flex: 1,
+              fontSize: { xs: "0.95rem", sm: "1.05rem" },
+              color: "#0f172a",
+              fontWeight: 500,
+              "& input": {
+                padding: 0,
+                "&::placeholder": {
+                  color: "#94a3b8",
+                  fontWeight: 400,
+                },
+              },
+            }}
+          />
+
+          {/* Enter hint with gradient */}
+          {input && (
+            <Box
+              sx={{
+                display: { xs: "none", sm: "flex" },
+                alignItems: "center",
+                gap: 0.5,
+                px: 2,
+                py: 1,
+                borderRadius: 2,
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                boxShadow: "0 4px 16px rgba(102, 126, 234, 0.3)",
+                ml: 1,
+                animation: "fadeIn 0.3s ease",
+                "@keyframes fadeIn": {
+                  from: { opacity: 0, transform: "scale(0.9)" },
+                  to: { opacity: 1, transform: "scale(1)" },
+                },
+              }}
+            >
+              <Typography
+                variant="caption"
+                sx={{
+                  color: "#ffffff",
+                  fontWeight: 700,
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                Enter
+              </Typography>
+              <Typography sx={{ color: "#ffffff", fontSize: "0.9rem" }}>
+                ↵
+              </Typography>
+            </Box>
+          )}
+        </Box>
+
+        {/* Enhanced decorative gradient line */}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: -12,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "60%",
+            height: 3,
+            background:
+              "linear-gradient(90deg, transparent 0%, #667eea 30%, #764ba2 50%, #667eea 70%, transparent 100%)",
+            opacity: 0.3,
+            borderRadius: 3,
+            transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+            "&:has(~ * input:focus)": {
+              opacity: 0.8,
+              width: "80%",
+              height: 4,
+              boxShadow: "0 0 20px rgba(102, 126, 234, 0.4)",
+            },
+          }}
+        />
+
+        {/* Floating particles */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: -10,
+            left: "25%",
+            width: 8,
+            height: 8,
+            bgcolor: "#a78bfa",
+            borderRadius: "50%",
+            opacity: 0,
+            transition: "opacity 0.3s ease",
+            "&:has(~ * input:focus)": {
+              opacity: 0.4,
+              animation: "ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite",
+            },
+            "@keyframes ping": {
+              "0%": { transform: "scale(1)", opacity: 0.4 },
+              "75%, 100%": { transform: "scale(2)", opacity: 0 },
+            },
+          }}
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            top: -5,
+            right: "30%",
+            width: 6,
+            height: 6,
+            bgcolor: "#ec4899",
+            borderRadius: "50%",
+            opacity: 0,
+            transition: "opacity 0.3s ease",
+            "&:has(~ * input:focus)": {
+              opacity: 0.4,
+              animation: "ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite 0.3s",
+            },
+            "@keyframes ping": {
+              "0%": { transform: "scale(1)", opacity: 0.4 },
+              "75%, 100%": { transform: "scale(2)", opacity: 0 },
+            },
+          }}
+        />
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: -5,
+            left: "35%",
+            width: 5,
+            height: 5,
+            bgcolor: "#3b82f6",
+            borderRadius: "50%",
+            opacity: 0,
+            transition: "opacity 0.3s ease",
+            "&:has(~ * input:focus)": {
+              opacity: 0.4,
+              animation: "ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite 0.6s",
+            },
+            "@keyframes ping": {
+              "0%": { transform: "scale(1)", opacity: 0.4 },
+              "75%, 100%": { transform: "scale(2)", opacity: 0 },
+            },
+          }}
+        />
+      </Box>
     </Box>
   );
 };

@@ -70,7 +70,6 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
           cursor: "pointer",
           overflow: "hidden",
           position: "relative",
-          // ВАЖЛИВО: Додаємо box-sizing
           boxSizing: "border-box",
           "&::before": {
             content: '""',
@@ -80,7 +79,7 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
             bottom: 0,
             width: 4,
             background:
-              "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
+              "linear-gradient(135deg, #ff758c 0%, #ff7eb3 50%, #ff758c 100%)",
             transform: "scaleY(0)",
             transition: "transform 0.4s ease",
           },
@@ -147,8 +146,6 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
               position: "absolute",
               inset: 0,
               borderRadius: 2.5,
-              background:
-                "linear-gradient(135deg, rgba(102, 126, 234, 0.6) 0%, rgba(240, 147, 251, 0.6) 100%)",
               opacity: 0,
               transition: "opacity 0.3s ease",
               zIndex: 2,
@@ -273,14 +270,11 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
         >
           <Box
             sx={{
-              background: "rgba(255, 255, 255, 0.9)",
               backdropFilter: "blur(10px)",
               borderRadius: 2,
               p: 0.5,
               display: "flex",
               gap: 0.5,
-              border: "1px solid rgba(102, 126, 234, 0.15)",
-              boxShadow: "0 2px 8px rgba(102, 126, 234, 0.08)",
             }}
           >
             <Box className="control-button">
@@ -291,12 +285,10 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
               size="medium"
               sx={{
                 color: "#ef4444",
-                background: "rgba(239, 68, 68, 0.1)",
                 transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                 "&:hover": {
                   background: "#ef4444",
                   color: "#fff",
-                  transform: "scale(1.15) rotate(8deg) !important",
                 },
               }}
               onClick={(e) => {
@@ -312,12 +304,10 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
               size="medium"
               sx={{
                 color: "#667eea",
-                background: "rgba(102, 126, 234, 0.1)",
                 transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                 "&:hover": {
                   background: "#667eea",
                   color: "#fff",
-                  transform: "scale(1.15) !important",
                 },
               }}
               onClick={handleMenuClick}
