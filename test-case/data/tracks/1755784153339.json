@@ -1,0 +1,14 @@
+{
+  "title": "string",
+  "artist": "Lady gaga",
+  "album": "string",
+  "genres": [
+    "string"
+  ],
+  "coverImage": "string",
+  "slug": "string",
+  "id": "1755784153339",
+  "createdAt": "2025-08-21T13:49:13.339Z",
+  "updatedAt": "2025-08-28T12:04:05.226Z",
+  "audioFile": "sdfsfds"
+}

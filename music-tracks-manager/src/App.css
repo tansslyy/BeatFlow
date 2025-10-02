@@ -1,0 +1,23 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FFF6FA;
+  margin: 0;
+}
+
+h1 {
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: white;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
