@@ -47,10 +47,6 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
     setGenres(genres.filter((g) => g !== genreToRemove));
   };
 
-  const validateImageUrl = (url: string) => {
-    return /^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i.test(url);
-  };
-
   const handleClose = () => {
     setTitle("");
     setArtist("");
@@ -88,7 +84,6 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
       if (savedTrack) {
         setCreatedTrack(savedTrack);
         setCurrentStep(1);
-        // handleClose();
       } else {
         console.log("Track was not saved");
       }

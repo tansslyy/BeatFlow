@@ -20,13 +20,11 @@ if (model.genre && model.genre.trim() !== "") params.genre = model.genre;
 if (model.artist && model.artist.trim() !== "") params.artist = model.artist
 
     const response = await axios.get<PageList<Track>>("http://localhost:8000/api/tracks",  { params });
-    console.log(response)
     if (response.status == 200 && response.data && response){
       return response.data;
     }
   }
   catch (error: any) {
-    console.log(error);
   }
   return undefined;
 };
@@ -38,9 +36,7 @@ export const createTrack = async (trackData: CreateTrack): Promise<Track|undefin
       return response.data;
     }
   }
-    catch (error: any) {
-    console.log(error);
-  }
+    catch (error: any) {}
   return undefined;
 };
 
@@ -51,9 +47,7 @@ export const fetchTrackbySlug = async(slug:string): Promise<Track|undefined> => 
       return response.data;
     }
   }
-  catch (error:any) {
-    console.log(error);
-  }
+  catch (error:any) {}
   return undefined;
 };
 
@@ -64,9 +58,7 @@ export const editTrack = async (trackData : EditTrack): Promise<Track|undefined>
       return response.data;
     }
   }
-   catch (error: any) {
-    console.log(error);
-  }
+   catch (error: any) {}
   return undefined;
 };
 
@@ -74,13 +66,10 @@ export const deleteTrack = async({id}:DeleteTrack): Promise<void> => {
   try{
     const response = await axios.delete(`http://localhost:8000/api/tracks/${id}`);
     if(response.status === 204){
-      console.log("Track deleted successfully");
     }
   }
-   catch (error: any) {
-    console.error("Failed to delete track:", error);
-  }
-};
+   catch (error: any) { }
+}
 
 export const deleteMultipleTracks = async(trackData: DeleteTracksRequest): Promise<void> => {
   try{
@@ -89,9 +78,7 @@ export const deleteMultipleTracks = async(trackData: DeleteTracksRequest): Promi
       return response.data
     }
   }
-   catch (error: any) {
-    console.log(error);
-  }
+   catch (error: any) {}
   return undefined;
 };
 
@@ -110,9 +97,7 @@ export const uploadTrackFile = async(trackId: string, file: File): Promise<Track
       return response.data;
     }
   }
-  catch (error: any) {
-    console.log(error);
-  }
+  catch (error: any) {}
   return undefined;
   
 };
@@ -124,8 +109,6 @@ export const deleteTrackFile = async(trackId: string): Promise<Track | undefined
       return response.data;
     }
   }
-  catch(error: any) {
-    console.log(error);
-  }
+  catch(error: any) {}
   return undefined;
 };
