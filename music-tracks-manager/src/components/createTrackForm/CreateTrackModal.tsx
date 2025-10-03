@@ -168,7 +168,7 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
                       color: "#555",
                       fontSize: "0.95rem",
                     },
-                    "& .Mui-active .MuiStepLabel-label": { color: "#1976d2" },
+                    "& .Mui-active .MuiStepLabel-label": { color: "#ff7eb3" },
                     "& .Mui-completed .MuiStepLabel-label": {
                       color: "#4caf50",
                     },
@@ -228,7 +228,7 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
                         backgroundColor: "#f5f7ff",
                         "&:hover fieldset": { borderColor: "#1976d2" },
                         "&.Mui-focused fieldset": {
-                          borderColor: "#1976d2",
+                          borderColor: "#ff7eb3",
                           boxShadow: "0 0 6px rgba(25,118,210,0.25)",
                         },
                       },
@@ -279,7 +279,7 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
                       fontWeight: "600",
                       bgcolor: "#e3f2fd",
                       color: "#1976d2",
-                      "& .MuiChip-deleteIcon": { color: "#1565c0" },
+                      "& .MuiChip-deleteIcon": { color: "#ff7eb3" },
                     }}
                   />
                 ))}
@@ -291,7 +291,7 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
             <Box sx={{ textAlign: "center", mt: 3 }}>
               <Typography
                 variant="h6"
-                sx={{ mb: 2, color: "#1976d2", fontWeight: 600 }}
+                sx={{ mb: 2, color: "#ff7eb3", fontWeight: 600 }}
               >
                 Track "{createdTrack.title}" Created!
               </Typography>
@@ -345,10 +345,10 @@ export const CreateTrackModal: React.FC<CreateTrackModalProps> = ({
               form="create-track-form"
               variant="contained"
               sx={{
-                background: "linear-gradient(135deg, #1976d2, #4dabf5)",
+                background: "linear-gradient(135deg, #ff7eb3, #4dabf5)",
                 fontWeight: "bold",
                 "&:hover": {
-                  background: "linear-gradient(135deg, #1565c0, #2196f3)",
+                  background: "linear-gradient(135deg, #ff7eb3, #2196f3)",
                 },
               }}
             >

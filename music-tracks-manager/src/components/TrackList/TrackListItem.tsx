@@ -102,7 +102,7 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
               transform: "scale(1)",
             },
             "& .track-title": {
-              color: "#667eea",
+              color: "#ff7eb3",
               transform: "translateX(3px)",
             },
             "& .control-button": {
@@ -175,7 +175,7 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
                 sx={{
                   width: 0,
                   height: 0,
-                  borderLeft: "7px solid #667eea",
+                  borderLeft: "7px solid #ff7eb3",
                   borderTop: "5px solid transparent",
                   borderBottom: "5px solid transparent",
                   ml: 0.4,
@@ -237,7 +237,7 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
                   height: 4,
                   borderRadius: "50%",
                   background:
-                    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                    "linear-gradient(135deg, #ff7eb3 0%, #764ba2 100%)",
                 }}
               />
               <Typography

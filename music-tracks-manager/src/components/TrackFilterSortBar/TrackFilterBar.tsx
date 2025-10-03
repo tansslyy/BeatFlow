@@ -81,7 +81,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
             alignItems: "center",
             justifyContent: "center",
             background: open
-              ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+              ? "linear-gradient(135deg, #ff7eb3 0%, #764ba2 100%)"
               : "rgba(255, 255, 255, 0.95)",
             backdropFilter: "blur(10px)",
             borderRadius: 2,
@@ -91,7 +91,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
             transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
             "&:hover": {
               background: open
-                ? "linear-gradient(135deg, #5568d3 0%, #664a91 100%)"
+                ? "linear-gradient(135deg, #ff7eb3 0%, #664a91 100%)"
                 : "rgba(255, 255, 255, 1)",
               transform: "translateY(-1px)",
               boxShadow: "0 8px 24px rgba(102, 126, 234, 0.2)",
@@ -100,7 +100,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
         >
           <FilterAltOutlinedIcon
             sx={{
-              color: open ? "#fff" : "#667eea",
+              color: open ? "#fff" : "#ff7eb3",
               transition: "all 0.3s ease",
             }}
           />
@@ -130,7 +130,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
               right: 0,
               height: 3,
               background:
-                "linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
+                "linear-gradient(90deg, #ff7eb3 0%, #764ba2 50%, #f093fb 100%)",
             },
           }}
         >
@@ -139,7 +139,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
             sx={{
               fontWeight: 700,
               fontSize: { xs: "1rem", sm: "1.1rem" },
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              background: "linear-gradient(135deg, #ff7eb3 0%, #764ba2 100%)",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -163,13 +163,13 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
                 "&:hover": {
                   background: "rgba(255, 255, 255, 1)",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#667eea",
+                    borderColor: "#ff7eb3",
                   },
                 },
                 "&.Mui-focused": {
                   background: "rgba(255, 255, 255, 1)",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#667eea",
+                    borderColor: "#ff7eb3",
                     borderWidth: 2,
                   },
                 },
@@ -205,13 +205,13 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
                 "&:hover": {
                   background: "rgba(255, 255, 255, 1)",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#667eea",
+                    borderColor: "#ff7eb3",
                   },
                 },
                 "&.Mui-focused": {
                   background: "rgba(255, 255, 255, 1)",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#667eea",
+                    borderColor: "#ff7eb3",
                     borderWidth: 2,
                   },
                 },
@@ -239,7 +239,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
             variant="contained"
             onClick={handleFilter}
             sx={{
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              background: "linear-gradient(135deg, #ff7eb3 0%, #764ba2 100%)",
               fontWeight: 600,
               borderRadius: 2,
               px: 3,
@@ -247,7 +247,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
               textTransform: "none",
               boxShadow: "0 2px 12px rgba(102,126,234,0.25)",
               "&:hover": {
-                background: "linear-gradient(135deg, #5568d3 0%, #664a91 100%)",
+                background: "linear-gradient(135deg, #ff7eb3 0%, #664a91 100%)",
                 transform: "translateY(-2px)",
                 boxShadow: "0 8px 24px rgba(102, 126, 234, 0.4)",
               },

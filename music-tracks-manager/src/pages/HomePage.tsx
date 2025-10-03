@@ -107,25 +107,27 @@ export const HomePage = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(to bottom, #f0f2f5, #e3e7f0)",
+        background:
+          "linear-gradient(135deg, #fff5f7 0%, #fef5f8 50%, #fff8fa 100%)",
         padding: "30px",
         fontFamily: "'Roboto', sans-serif",
       }}
     >
       {/* Header */}
       <Paper
-        elevation={6}
+        elevation={0}
         sx={{
           display: "flex",
           flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
           justifyContent: "space-between",
-          padding: { xs: "16px 20px", sm: "20px 30px" },
-          borderRadius: "30px",
-          background: "linear-gradient(145deg, #f5f5f5, #ffffff)",
-          mb: 5,
-          boxShadow: "0 12px 30px rgba(0,0,0,0.12)",
-          textAlign: "center",
+          padding: { xs: "24px 28px", sm: "28px 40px" },
+          borderRadius: "20px",
+          background: "rgba(255, 255, 255, 0.7)",
+          backdropFilter: "blur(20px)",
+          mb: 4,
+          border: "1px solid rgba(255, 126, 179, 0.15)",
+          boxShadow: "0 8px 32px rgba(255, 126, 179, 0.08)",
         }}
       >
         {/* Left Side: Icon + Title */}
@@ -133,27 +135,36 @@ export const HomePage = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: 2,
-            mb: { xs: 2, sm: 0 },
+            gap: 2.5,
             justifyContent: "center",
-            width: "100%",
           }}
         >
-          <LibraryMusicIcon
+          <Box
             sx={{
-              fontSize: { xs: 40, sm: 50 },
-              background: "linear-gradient(135deg, #5c6bc0, #8e99f3)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              width: { xs: 44, sm: 52 },
+              height: { xs: 44, sm: 52 },
+              borderRadius: "14px",
+              background: "linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 4px 16px rgba(255, 126, 179, 0.3)",
             }}
-          />
+          >
+            <LibraryMusicIcon
+              sx={{
+                fontSize: { xs: 26, sm: 30 },
+                color: "#ffffff",
+              }}
+            />
+          </Box>
           <Typography
             variant="h4"
             sx={{
               fontWeight: 700,
-              color: "#2e3a59",
-              letterSpacing: "1px",
-              fontSize: { xs: "1.6rem", sm: "2rem" },
+              color: "#2a2a2a",
+              letterSpacing: "-0.8px",
+              fontSize: { xs: "1.5rem", sm: "1.9rem" },
             }}
           >
             Track Manager
@@ -165,21 +176,21 @@ export const HomePage = () => {
           variant="contained"
           onClick={() => setShowModal(true)}
           sx={{
-            background: "linear-gradient(135deg, #5c6bc0, #8e99f3)",
-            fontWeight: "bold",
-            borderRadius: "30px",
-            px: { xs: 2.5, sm: 3 },
-            py: { xs: 1, sm: 1.2 },
+            background: "linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)",
+            fontWeight: 600,
+            borderRadius: "14px",
+            px: { xs: 3, sm: 3.5 },
+            py: { xs: 1.2, sm: 1.4 },
             textTransform: "none",
             fontSize: { xs: "0.9rem", sm: "1rem" },
-            boxShadow: "0 6px 18px rgba(0,0,0,0.15)",
-            transition: "all 0.3s ease",
+            boxShadow: "0 4px 16px rgba(255, 126, 179, 0.3)",
+            transition: "all 0.2s ease",
             "&:hover": {
-              background: "linear-gradient(135deg, #3f51b5, #7e8cf5)",
-              transform: "translateY(-2px) scale(1.02)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
+              background: "linear-gradient(135deg, #ff6a7f 0%, #ff71a6 100%)",
+              boxShadow: "0 6px 20px rgba(255, 126, 179, 0.4)",
+              transform: "translateY(-2px)",
             },
-            mt: { xs: 1, sm: 0 },
+            mt: { xs: 2, sm: 0 },
           }}
         >
           + Add Track
@@ -194,39 +205,50 @@ export const HomePage = () => {
           alignItems: "center",
           justifyContent: "space-between",
           width: "100%",
-          margin: "0 auto 24px",
+          margin: "0 auto 28px",
           gap: { xs: 2, md: 3 },
         }}
       >
         {/* Search */}
         <Paper
-          elevation={6}
+          elevation={0}
           sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             flex: { xs: "1 1 100%", md: "0 0 70%" },
-            padding: { xs: "12px 16px", sm: "16px 24px" },
-            borderRadius: "30px",
-            background: "linear-gradient(145deg, #f9f9f9, #fff0f5)",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+            padding: { xs: "14px 20px", sm: "16px 24px" },
+            borderRadius: "12px",
+            background: "#ffffff",
+            border: "1px solid #f0f0f0",
+            transition: "all 0.2s ease",
+            "&:hover": {
+              borderColor: "#ff7eb3",
+            },
             input: {
               width: "100%",
               padding: { xs: "10px 14px", sm: "12px 16px" },
-              borderRadius: "20px",
               border: "none",
-              background: "#fff",
-              boxShadow: "inset 0 2px 6px rgba(0,0,0,0.1)",
+              background: "transparent",
+              fontSize: "0.95rem",
+              color: "#2a2a2a",
               "&:focus": {
                 outline: "none",
-                boxShadow: "0 0 8px rgba(92,107,192,0.4)",
+              },
+              "&::placeholder": {
+                color: "#b0b0b0",
               },
             },
           }}
         >
-          <SearchAppBar
-            onSearch={(response) => {
-              setTracks(response);
-              setPage(0);
-            }}
-          />
+          <Box sx={{ width: "100%", maxWidth: 1200, my: "auto" }}>
+            <SearchAppBar
+              onSearch={(response) => {
+                setTracks(response);
+                setPage(0);
+              }}
+            />
+          </Box>
         </Paper>
 
         {/* Filter */}
@@ -239,21 +261,21 @@ export const HomePage = () => {
           }}
         >
           <Paper
-            elevation={3}
+            elevation={0}
             sx={{
-              borderRadius: "50px",
-              padding: "4px 8px",
-              width: { xs: "100%", md: 120 },
-              height: 40,
+              borderRadius: "12px",
+              padding: "8px 12px",
+              width: { xs: "100%", md: 140 },
+              height: 48,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 3px 10px rgba(0,0,0,0.08)",
+              background: "#ffffff",
+              border: "1px solid #f0f0f0",
               cursor: "pointer",
-              transition: "all 0.3s ease",
+              transition: "all 0.2s ease",
               "&:hover": {
-                boxShadow: "0 6px 20px rgba(0,0,0,0.12)",
-                transform: "translateY(-2px)",
+                borderColor: "#ff7eb3",
               },
             }}
           >
@@ -282,13 +304,33 @@ export const HomePage = () => {
 
       {/* Track List */}
       {tracks?.data.length === 0 ? (
-        <Typography
-          variant="h6"
-          align="center"
-          sx={{ color: "#9e9e9e", fontStyle: "italic", mt: 5 }}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            mt: 8,
+            mb: 8,
+          }}
         >
-          Немає треків 💤
-        </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: "#9e9e9e",
+              fontWeight: 400,
+              mb: 0.5,
+            }}
+          >
+            Немає треків 💤
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ color: "#c0c0c0", fontSize: "0.9rem" }}
+          >
+            Додайте свій перший трек
+          </Typography>
+        </Box>
       ) : (
         <TrackList
           tracks={tracks}
@@ -298,7 +340,13 @@ export const HomePage = () => {
       )}
 
       {/* Pagination */}
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mt: 4,
+        }}
+      >
         <TablePagination
           component="div"
           count={tracks?.meta.total || 0}
@@ -307,11 +355,32 @@ export const HomePage = () => {
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
           sx={{
-            background: "#fff",
-            borderRadius: "20px",
-            px: 2,
-            boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-            "& .MuiTablePagination-toolbar": { minHeight: 60 },
+            background: "#ffffff",
+            borderRadius: "12px",
+            px: 3,
+            py: 1,
+            border: "1px solid #f0f0f0",
+            "& .MuiTablePagination-toolbar": {
+              minHeight: 64,
+            },
+            "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
+              {
+                color: "#666",
+                fontWeight: 400,
+              },
+            "& .MuiTablePagination-select": {
+              color: "#2a2a2a",
+            },
+            "& .MuiIconButton-root": {
+              color: "#ff7eb3",
+              transition: "all 0.2s ease",
+              "&:hover": {
+                background: "rgba(255, 126, 179, 0.08)",
+              },
+              "&.Mui-disabled": {
+                color: "#d0d0d0",
+              },
+            },
           }}
         />
       </Box>

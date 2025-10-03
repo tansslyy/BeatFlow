@@ -79,10 +79,10 @@ export const TrackForm = () => {
               borderRadius: 3,
               backgroundColor: "#f9f9ff",
               "&:hover fieldset": {
-                borderColor: "#4a90e2",
+                borderColor: "#ff7eb3",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "#4a90e2",
+                borderColor: "#ff7eb3",
                 boxShadow: "0 0 6px rgba(74,144,226,0.3)",
               },
             },
@@ -154,7 +154,7 @@ export const TrackForm = () => {
           sx={{
             mt: 1,
             borderRadius: 3,
-            background: "linear-gradient(135deg, #4a90e2, #50e3c2)",
+            background: "linear-gradient(135deg, #ff7eb3, #50e3c2)",
             color: "#fff",
             py: 1.8,
             fontWeight: "700",
