@@ -66,7 +66,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
         width: "100%",
       }}
     >
-      {/* Кнопка фільтрів */}
+      {/* Filter button */}
       <Box
         sx={{
           display: "flex",
@@ -107,7 +107,7 @@ export const TrackFilterBar: React.FC<Props> = ({ tracks, onFilter }) => {
         </IconButton>
       </Box>
 
-      {/* Панель фільтрів */}
+      {/* Filter panel */}
       <Collapse in={open} timeout={400}>
         <Paper
           elevation={0}

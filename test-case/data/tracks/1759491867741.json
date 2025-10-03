@@ -1,0 +1,15 @@
+{
+  "title": "hgf",
+  "artist": "jhgf",
+  "album": "jhgf",
+  "genres": [
+    "pop",
+    "rock"
+  ],
+  "coverImage": "hj",
+  "slug": "hgf",
+  "id": "1759491867741",
+  "createdAt": "2025-10-03T11:44:27.741Z",
+  "updatedAt": "2025-10-03T11:45:08.344Z",
+  "audioFile": "http://localhost:8000/api/files/1759491867741.mp3"
+}

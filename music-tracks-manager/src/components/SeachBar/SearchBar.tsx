@@ -10,7 +10,6 @@ import { fetchTracks } from "../../api/track/trackApi";
 import { GetModel } from "../../api/track/models/CreateTrack";
 import { Track } from "../../api/track/models/Track";
 import { PageList } from "../../types/PageList";
-import { Typography } from "@mui/material";
 
 type Props = {
   onSearch: (results: PageList<Track>) => void;
@@ -71,7 +70,7 @@ export const SearchAppBar: React.FC<Props> = ({ onSearch }) => {
           justifyContent: "center",
         }}
       >
-        {/* Main Search Bar - чистий та сучасний дизайн */}
+        {/* Main Search Bar */}
         <Box
           sx={{
             flex: 1,

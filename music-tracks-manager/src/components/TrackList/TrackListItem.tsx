@@ -356,7 +356,7 @@ export const TrackListItem: React.FC<TrackItemProps> = ({
             },
           }}
         >
-          ✏️ Edit Track
+          Edit Track
         </MenuItem>
       </Menu>
 
